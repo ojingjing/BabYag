@@ -23,7 +23,7 @@ class SecurityConfig(@Autowired private val jwtFilter: JwtFilter) {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.authorizeHttpRequests()
-            .requestMatchers("/api/member/auth").authenticated()
+            .requestMatchers("/member/auth").authenticated()
             .anyRequest().permitAll()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

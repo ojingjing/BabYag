@@ -5,6 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import java.time.LocalDate
 
 @Entity
@@ -15,5 +16,8 @@ class Member(
     @Column(unique = true) val sno: String,
     @Column(unique = true) var nickname: String,
     val name: String,
-    val birthDate: LocalDate
+    val department : String,
+    val birthDate: LocalDate,
+    @OneToMany(mappedBy = "member")
+    val posts: List<Post> = ArrayList()
 )

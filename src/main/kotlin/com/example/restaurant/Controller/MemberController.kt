@@ -1,5 +1,6 @@
 package com.example.restaurant.Controller
 
+import com.example.restaurant.dto.LoginDto
 import com.example.restaurant.dto.MemberDto
 import com.example.restaurant.service.MemberService
 import org.springframework.beans.factory.annotation.Autowired
@@ -36,10 +37,26 @@ class MemberController(
                 password2 = memberDto.password2,
                 name = memberDto.name,
                 nickname = memberDto.nickname,
-                birthDate = memberDto.birthDate
+                birthDate = memberDto.birthDate,
+                department = memberDto.department,
             )
         )
         return ResponseEntity.ok().body(MemberResponse(mutableMapOf("success" to "true"), mutableListOf()))
+    }
+
+    @PostMapping("/login")
+    fun login(
+        @RequestBody @Validated loginDto: LoginDto,
+        bindingResult: BindingResult
+    ): ResponseEntity<MemberResponse> {
+        if (bindingResult.hasErrors()) return ResponseEntity.badRequest().body(MemberResponse(mutableMapOf(), fieldErrors(bindingResult)))
+        if (!memberService.checkEmailDuplication(loginDto.email!!)) {
+            return ResponseEntity.badRequest().body(MemberResponse(mutableMapOf(), mutableListOf("가입된 email이 없습니다.")))
+        }
+        if (!memberService.checkLogin(loginDto.email!!, loginDto.password!!)) {
+            return ResponseEntity.badRequest().body(MemberResponse(mutableMapOf(), mutableListOf("패스워드가 일치하지 않습니다.")))
+        }
+        return ResponseEntity.ok(MemberResponse(mutableMapOf("token" to memberService.login(loginDto)), mutableListOf()))
     }
 
     private fun fieldErrors(bindingResult: BindingResult): MutableList<String> {
