@@ -1,0 +1,49 @@
+{
+    "expo": {
+        "name": "BabYag",
+        "slug": "BabYag",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#ffffff"
+        },
+        "assetBundlePatterns": ["**/*"],
+        // "ios": {
+        //   "supportsTablet": true
+        // },
+        // "android": {
+        //   "adaptiveIcon": {
+        //     "foregroundImage": "./assets/adaptive-icon.png",
+        //     "backgroundColor": "#ffffff"
+        //   }
+        // },
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.BapYak.present",
+            "config": {
+                "googleMaps": {
+                    "apiKey": "AIzaSyBhgfVFZmIsSjDeB-M93G49lEgjsYs6q7k"
+                }
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "package": "com.BapYak.present",
+            "config": {
+                "googleMaps": {
+                    "apiKey": "AIzaSyCQBhKgvhcD2SPTkeavMisWMtTsK9rHRmQ"
+                }
+            }
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        }
+    }
+}
