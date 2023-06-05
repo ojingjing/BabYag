@@ -26,7 +26,7 @@
             "bundleIdentifier": "com.BapYak.present",
             "config": {
                 "googleMaps": {
-                    "apiKey": "AIzaSyBhgfVFZmIsSjDeB-M93G49lEgjsYs6q7k"
+                    "apiKey": "ios key"
                 }
             }
         },
@@ -38,7 +38,7 @@
             "package": "com.BapYak.present",
             "config": {
                 "googleMaps": {
-                    "apiKey": "AIzaSyCQBhKgvhcD2SPTkeavMisWMtTsK9rHRmQ"
+                    "apiKey": "and key"
                 }
             }
         },
