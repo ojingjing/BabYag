@@ -7,6 +7,8 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import org.hibernate.validator.constraints.Range
+import org.springframework.web.multipart.MultipartFile
+import java.time.LocalDateTime
 
 @Entity
 class Post(
@@ -15,12 +17,9 @@ class Post(
     val keyword: String,
     val category: String,
     val photo: String? = null,
-
-    @Range(min = 0, max = 5)
     val rating: Int,
-
     val comment: String,
-
+    val createdDate: LocalDateTime? = null,
     @ManyToOne
     @JoinColumn(name = "member_id")
     val member: Member
