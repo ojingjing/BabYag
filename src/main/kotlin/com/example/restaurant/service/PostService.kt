@@ -34,7 +34,7 @@ class PostService(
                 rating = postDto.rating,
                 comment = postDto.comment,
                 createdDate = now,
-                member = memberRepository.findByEmail(email).get()
+                nickname = "Jing"
             )
 
             postRepository.save(post)

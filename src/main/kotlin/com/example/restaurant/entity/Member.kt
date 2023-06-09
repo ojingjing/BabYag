@@ -18,6 +18,4 @@ class Member(
     val name: String,
     val department : String,
     val birthDate: LocalDate,
-    @OneToMany(mappedBy = "member")
-    val posts: List<Post> = ArrayList()
 )

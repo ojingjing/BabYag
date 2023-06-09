@@ -20,7 +20,5 @@ class Post(
     val rating: Int,
     val comment: String,
     val createdDate: LocalDateTime? = null,
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    val member: Member
+    val nickname : String,
 )
