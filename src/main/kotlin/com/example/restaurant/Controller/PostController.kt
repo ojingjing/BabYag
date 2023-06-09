@@ -5,12 +5,15 @@ import com.example.restaurant.entity.Post
 import com.example.restaurant.repository.MemberRepository
 import com.example.restaurant.repository.PostRepository
 import com.example.restaurant.service.PostService
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.validation.BindingResult
 import org.springframework.validation.FieldError
 import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -46,6 +49,42 @@ class PostController(
         }
         val postResponse = postService.createPost(postDto, email)
         return ResponseEntity.ok().body(postResponse)
+    }
+    @GetMapping("/lists")
+    fun getAllPosts(): ResponseEntity<PostResponse> {
+        val posts = postRepository.findAll()
+        val responseData = mutableMapOf<String, String>()
+        val objectMapper = ObjectMapper()
+        responseData["data"] = objectMapper.writeValueAsString(posts.map { post ->
+            mapOf(
+                "id" to post.id.toString(),
+                "storeName" to post.storeName,
+                "nickname" to post.nickname,
+                "rating" to post.rating.toString()
+            )
+        })
+
+        val postResponse = PostResponse(responseData, mutableListOf())
+        return ResponseEntity.ok().body(postResponse)
+    }
+
+    @GetMapping("/detail/{postId}")
+    fun getPostDetails(@PathVariable postId: Long): ResponseEntity<PostResponse> {
+        val post = postRepository.findById(postId)
+        if (post.isPresent) {
+            val responseData = mutableMapOf<String, String>()
+            val selectedPost = post.get()
+            responseData["id"] = selectedPost.id.toString()
+            responseData["storeName"] = selectedPost.storeName
+            responseData["nickname"] = selectedPost.nickname
+            responseData["rating"] = selectedPost.rating.toString()
+            responseData["comment"] = selectedPost.comment
+
+            val postResponse = PostResponse(responseData, mutableListOf())
+            return ResponseEntity.ok().body(postResponse)
+        } else {
+            return ResponseEntity.notFound().build()
+        }
     }
     private fun fieldErrors(bindingResult: BindingResult): MutableList<String> {
         val errors = mutableListOf<String>()
