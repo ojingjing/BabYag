@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
 data class PostResponse(val data: MutableMap<String, String>, val errors: MutableList<String>)
+data class PostResponse1(val data: List<Map<String, String>>, val errors: MutableList<String>)
 
 @RestController
 @RequestMapping("/post")
 class PostController(
     @Autowired private val postRepository: PostRepository,
-    @Autowired private val memberRepository: MemberRepository,
     @Autowired private val postService: PostService,
 ){
     @PostMapping("/create")
@@ -50,23 +50,39 @@ class PostController(
         val postResponse = postService.createPost(postDto, email)
         return ResponseEntity.ok().body(postResponse)
     }
+//    @GetMapping("/lists")
+//    fun getAllPosts(): ResponseEntity<PostResponse> {
+//        val posts = postRepository.findAll()
+//        val responseData = mutableMapOf<String, String>()
+//        val objectMapper = ObjectMapper()
+//        responseData["data"] = objectMapper.writeValueAsString(posts.map { post ->
+//            mapOf(
+//                "id" to post.id.toString(),
+//                "storeName" to post.storeName,
+//                "nickname" to post.nickname,
+//                "rating" to post.rating.toString()
+//            )
+//        })
+//
+//        val postResponse = PostResponse(responseData, mutableListOf())
+//        return ResponseEntity.ok().body(postResponse)
+//    }
     @GetMapping("/lists")
-    fun getAllPosts(): ResponseEntity<PostResponse> {
+    fun getAllPosts(): ResponseEntity<PostResponse1> {
         val posts = postRepository.findAll()
-        val responseData = mutableMapOf<String, String>()
-        val objectMapper = ObjectMapper()
-        responseData["data"] = objectMapper.writeValueAsString(posts.map { post ->
+        val responseData = posts.map { post ->
             mapOf(
                 "id" to post.id.toString(),
                 "storeName" to post.storeName,
                 "nickname" to post.nickname,
                 "rating" to post.rating.toString()
             )
-        })
+        }
 
-        val postResponse = PostResponse(responseData, mutableListOf())
+        val postResponse = PostResponse1(data = responseData, errors = mutableListOf())
         return ResponseEntity.ok().body(postResponse)
     }
+
 
     @GetMapping("/detail/{postId}")
     fun getPostDetails(@PathVariable postId: Long): ResponseEntity<PostResponse> {
