@@ -50,23 +50,6 @@ class PostController(
         val postResponse = postService.createPost(postDto, email)
         return ResponseEntity.ok().body(postResponse)
     }
-//    @GetMapping("/lists")
-//    fun getAllPosts(): ResponseEntity<PostResponse> {
-//        val posts = postRepository.findAll()
-//        val responseData = mutableMapOf<String, String>()
-//        val objectMapper = ObjectMapper()
-//        responseData["data"] = objectMapper.writeValueAsString(posts.map { post ->
-//            mapOf(
-//                "id" to post.id.toString(),
-//                "storeName" to post.storeName,
-//                "nickname" to post.nickname,
-//                "rating" to post.rating.toString()
-//            )
-//        })
-//
-//        val postResponse = PostResponse(responseData, mutableListOf())
-//        return ResponseEntity.ok().body(postResponse)
-//    }
     @GetMapping("/lists")
     fun getAllPosts(): ResponseEntity<PostResponse1> {
         val posts = postRepository.findAll()
@@ -75,6 +58,7 @@ class PostController(
                 "id" to post.id.toString(),
                 "storeName" to post.storeName,
                 "nickname" to post.nickname,
+                "category" to post.category,
                 "rating" to post.rating.toString()
             )
         }
