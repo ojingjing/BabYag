@@ -8,8 +8,8 @@ data class PostDto(
     @field:NotNull(message = "가게 이름은 필수 항목입니다.")
     val storeName: String,
 
-    @field:NotNull(message = "키워드는 필수 항목입니다.")
-    val keyword: String,
+    @field:NotNull(message = "주소는 필수 항목입니다.")
+    val location: String,
 
     @field:NotNull(message = "카테고리는 필수 항목입니다.")
     val category: String,

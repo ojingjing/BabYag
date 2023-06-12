@@ -38,7 +38,7 @@ class PostController(
         if (postDto.category.isNullOrEmpty()) {
             return ResponseEntity.badRequest().body(PostResponse(mutableMapOf(), mutableListOf("카테고리는 필수 입니다.")))
         }
-        if (postDto.keyword.isNullOrEmpty()) {
+        if (postDto.location.isNullOrEmpty()) {
             return ResponseEntity.badRequest().body(PostResponse(mutableMapOf(), mutableListOf("keyword는 필수 입니다.")))
         }
         if (postDto.comment.isNullOrEmpty()) {
@@ -57,6 +57,7 @@ class PostController(
             mapOf(
                 "id" to post.id.toString(),
                 "storeName" to post.storeName,
+                "location" to post.location,
                 "nickname" to post.nickname,
                 "category" to post.category,
                 "rating" to post.rating.toString()

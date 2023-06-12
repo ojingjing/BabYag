@@ -15,7 +15,6 @@ import java.util.UUID
 
 @Service
 class PostService(
-    @Autowired private val memberRepository: MemberRepository,
     @Autowired private val postRepository: PostRepository,
 ) {
     fun createPost(postDto: PostDto, email: String): PostResponse {
@@ -28,7 +27,7 @@ class PostService(
             val savedPhotoPath = savePhoto(postDto.photo)
             val post = Post(
                 storeName = postDto.storeName,
-                keyword = postDto.keyword,
+                location = postDto.location,
                 category = postDto.category,
                 photo = savedPhotoPath,
                 rating = postDto.rating,

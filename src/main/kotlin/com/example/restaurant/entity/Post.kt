@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 class Post(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long? = null,
     val storeName: String,
-    val keyword: String,
+    val location: String,
     val category: String,
     val photo: String? = null,
     val rating: Int,
