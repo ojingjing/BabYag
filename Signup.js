@@ -68,7 +68,7 @@ const Signup = () => {
             />
             <TextInput
                 style={styles.input}
-                placeholder="NiceName" //hint
+                placeholder="NickName" //hint
             />
             <TextInput
                 style={styles.input}

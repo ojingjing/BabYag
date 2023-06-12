@@ -1,24 +1,3 @@
-// import { StatusBar } from "expo-status-bar";
-// import { StyleSheet, Text, View } from "react-native";
-
-// export default function App() {
-//     return (
-//         <View style={styles.container}>
-//             <Text>Open up App.js to start working on your app!</Text>
-//             <StatusBar style="auto" />
-//         </View>
-//     );
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: "#fff",
-//         alignItems: "center",
-//         justifyContent: "center",
-//     },
-// });
-
 import { Button, StyleSheet, Text, View, button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -34,6 +13,7 @@ const Tab = createBottomTabNavigator();
 function HomeTab() {
     return (
         <Tab.Navigator
+            initialRouteName="MAP"
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
@@ -92,18 +72,18 @@ function HomeTab() {
             <Tab.Screen
                 name="MAP"
                 component={routes[5].component}
-                options={({ navigation }) => ({
-                    headerRight: () => (
-                        <Icon.Button
-                            name={"user"}
-                            solid
-                            size={22}
-                            backgroundColor="transparent"
-                            color="orange"
-                            onPress={() => navigation.navigate("login")}
-                        ></Icon.Button>
-                    ),
-                })}
+                // options={({ navigation }) => ({
+                //     headerRight: () => (
+                //         <Icon.Button
+                //             name={"user"}
+                //             solid
+                //             size={22}
+                //             backgroundColor="transparent"
+                //             color="orange"
+                //             onPress={() => navigation.navigate("login")}
+                //         ></Icon.Button>
+                //     ),
+                // })}
             />
             <Tab.Screen
                 name="MYPAGE"
