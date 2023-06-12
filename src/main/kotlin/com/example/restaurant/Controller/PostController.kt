@@ -60,6 +60,7 @@ class PostController(
                 "location" to post.location,
                 "nickname" to post.nickname,
                 "category" to post.category,
+                "comment" to post.comment,
                 "rating" to post.rating.toString()
             )
         }
@@ -77,6 +78,7 @@ class PostController(
             val selectedPost = post.get()
             responseData["id"] = selectedPost.id.toString()
             responseData["storeName"] = selectedPost.storeName
+            responseData["location"] = selectedPost.location
             responseData["nickname"] = selectedPost.nickname
             responseData["rating"] = selectedPost.rating.toString()
             responseData["comment"] = selectedPost.comment
